@@ -1,3 +1,9 @@
+## [1.0.2](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.0.1...v1.0.2) (2025-12-14)
+
+### Bug Fixes
+
+* add continue-on-error to backend Trivy scan ([db58dcf](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/db58dcfd94475d1b7e2396387b8011c08df6b01d))
+
 ## [1.0.1](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.0.0...v1.0.1) (2025-12-14)
 
 ### Bug Fixes
