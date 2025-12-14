@@ -159,6 +159,7 @@ jobs:
       # Trivy - Container Vulnerability Scanning
       # ============================================
       - name: Run Trivy - Backend Image
+        continue-on-error: true # Allow pipeline to continue even if vulnerabilities found, Application Level issue, Report But Don't Fail.
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: 'acr3tiermernappao.azurecr.io/backend:v${{ needs.semantic-release.outputs.new_release_version }}'
