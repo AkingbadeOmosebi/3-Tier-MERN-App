@@ -1,3 +1,9 @@
+## [1.0.1](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.0.0...v1.0.1) (2025-12-14)
+
+### Bug Fixes
+
+* configure Trivy to report vulnerabilities without blocking pipeline ([1494f19](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/1494f19a668fbd4db2fb48d75c1306527ccb279f))
+
 ## 1.0.0 (2025-12-14)
 
 ### Features
