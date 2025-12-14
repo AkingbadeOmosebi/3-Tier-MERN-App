@@ -13,18 +13,18 @@ Switch to the `compose` branch to learn the
 
 - Install `npm`
 
-#### Start Server:
+#### Start backend Server:
 
 ```
-cd mern/server
+cd mern/backend
 npm install
 npm start
 ```
 
-#### Start Client
+#### Start frontend Client
 
 ```
-cd mern/client
+cd mern/frontend
 npm install
 npm run dev
 ```
