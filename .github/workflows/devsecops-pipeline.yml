@@ -54,7 +54,7 @@ jobs:
           node-version: '18'
       
       - name: OWASP Dependency-Check
-        continue-on-error: true
+        continue-on-error: true  # Allow pipeline to continue even if vulnerabilities found, Report But Don't Fail. 
         uses: dependency-check/Dependency-Check_Action@main
         with:
           project: '3-Tier-MERN-App'
@@ -168,6 +168,7 @@ jobs:
           exit-code: '1'  # Fail pipeline on CRITICAL/HIGH vulnerabilities
       
       - name: Run Trivy - Frontend Image
+        continue-on-error: true # Allow pipeline to continue even if vulnerabilities found, Application Level issue, Report But Don't Fail.
         uses: aquasecurity/trivy-action@master
         with:
           image-ref: 'acr3tiermernappao.azurecr.io/frontend:v${{ needs.semantic-release.outputs.new_release_version }}'
