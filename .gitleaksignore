@@ -1,0 +1,7 @@
+# GitLeaks Ignore File - False Positives
+
+# SonarCloud project identifiers (not secrets)
+sonar-project.properties:sonar.projectKey
+sonar-project.properties:sonar.organization
+.github/workflows/devsecops-pipeline.yml:sonar.projectKey
+.github/workflows/devsecops-pipeline.yml:sonar.organization
