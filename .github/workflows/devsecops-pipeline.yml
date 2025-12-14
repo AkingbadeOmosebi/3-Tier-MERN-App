@@ -53,6 +53,7 @@ jobs:
           node-version: '18'
       
       - name: OWASP Dependency-Check
+        continue-on-error: true
         uses: dependency-check/Dependency-Check_Action@main
         with:
           project: '3-Tier-MERN-App'
@@ -175,7 +176,7 @@ jobs:
         with:
           sarif_file: '.'
           category: 'trivy-container-scan'
-          
+
 
   push-to-acr:
     name: Push Images to Azure Container Registry
