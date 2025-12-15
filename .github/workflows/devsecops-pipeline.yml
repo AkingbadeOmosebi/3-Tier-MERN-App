@@ -297,6 +297,8 @@ jobs:
 
   notify-results:
     name: Notify Pipeline Results
+    permissions:
+      issues: write
     runs-on: ubuntu-latest
     needs: [security-scans, semantic-release, build-and-scan, push-to-acr]
     if: always()
