@@ -15,6 +15,7 @@ permissions:
 
 jobs:
   security-scans:
+    timeout-minutes: 30
     name: Code Security Scanning
     runs-on: ubuntu-latest
     
@@ -52,6 +53,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+        
+      # Cache OWASP database
+      - name: Cache OWASP DB
+        uses: actions/cache@v4
+        with:
+          path: ~/.gradle/dependency-check-data
+          key: ${{ runner.os }}-owasp-${{ hashFiles('**/package-lock.json') }}
       
       - name: OWASP Dependency-Check
         continue-on-error: true  # Allow pipeline to continue even if vulnerabilities found, Report But Don't Fail. 
@@ -72,6 +82,7 @@ jobs:
           path: reports/
   
   semantic-release:
+    timeout-minutes: 10
     name: Semantic Release & Versioning
     runs-on: ubuntu-latest
     needs: security-scans  # Only run if security 
@@ -112,6 +123,7 @@ jobs:
             conventional-changelog-conventionalcommits@8.0.0 
 
   build-and-scan:
+    timeout-minutes: 45
     name: Build & Container Security
     runs-on: ubuntu-latest
     needs: semantic-release  # ← CHANGED: Now depends on semantic-release
@@ -220,6 +232,7 @@ jobs:
 
 
   push-to-acr:
+    timeout-minutes: 30
     name: Push Images to Azure Container Registry
     runs-on: ubuntu-latest
     needs: [semantic-release, build-and-scan]  # Needs both version and built images
@@ -249,7 +262,7 @@ jobs:
       # ============================================
       # Rebuild & Push Images (with version tags)
       # ============================================
-      - name: Build & Push Backend Image
+      - name: Build & Push Backend Image   # Build time: 2 min × 2 jobs = 4 minutes. Whereas Artifact storage Costs money (storage fees), Artifact downloads can be slower than rebuild (for large images) The complexity of artifact management (save/upload/download/load) adds failure points without significant time savings. In production, this will be evaluated or discussed, but not for this my personal project.
         run: |
           docker build \
             -t acr3tiermernappao.azurecr.io/backend:v${{ needs.semantic-release.outputs.new_release_version }} \
@@ -260,7 +273,7 @@ jobs:
           docker push acr3tiermernappao.azurecr.io/backend:v${{ needs.semantic-release.outputs.new_release_version }}
           docker push acr3tiermernappao.azurecr.io/backend:latest
       
-      - name: Build & Push Frontend Image
+      - name: Build & Push Frontend Image  # Same as above note
         run: |
           docker build \
             -t acr3tiermernappao.azurecr.io/frontend:v${{ needs.semantic-release.outputs.new_release_version }} \
@@ -296,6 +309,7 @@ jobs:
         if: always()
 
   notify-results:
+    timeout-minutes: 5
     name: Notify Pipeline Results
     permissions:
       issues: write
