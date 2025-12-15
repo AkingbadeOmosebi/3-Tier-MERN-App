@@ -154,7 +154,33 @@ jobs:
             -t acr3tiermernappao.azurecr.io/frontend:latest \
             -f MERN-APP/frontend/Dockerfile \
             MERN-APP/frontend
-
+    
+      # ============================================
+      # SBOM Generation - Software Bill of Materials
+      # ============================================
+      - name: Generate SBOM for Backend
+        uses: anchore/sbom-action@v0
+        with:
+          image: acr3tiermernappao.azurecr.io/backend:v${{ needs.semantic-release.outputs.new_release_version }}
+          format: cyclonedx-json
+          output-file: sbom-backend.cyclonedx.json
+      
+      - name: Generate SBOM for Frontend
+        uses: anchore/sbom-action@v0
+        with:
+          image: acr3tiermernappao.azurecr.io/frontend:v${{ needs.semantic-release.outputs.new_release_version }}
+          format: cyclonedx-json
+          output-file: sbom-frontend.cyclonedx.json
+      
+      - name: Upload SBOM Artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: sbom-reports
+          path: |
+            sbom-backend.cyclonedx.json
+            sbom-frontend.cyclonedx.json
+    
       # ============================================
       # Trivy - Container Vulnerability Scanning
       # ============================================
@@ -246,8 +272,149 @@ jobs:
           docker push acr3tiermernappao.azurecr.io/frontend:latest
       
       # ============================================
+      # Image Signing with Cosign (Supply Chain Security)
+      # ============================================
+      - name: Install Cosign
+        uses: sigstore/cosign-installer@v3
+      
+      - name: Sign Backend Image
+        run: |
+          cosign sign --yes \
+            acr3tiermernappao.azurecr.io/backend:v${{ needs.semantic-release.outputs.new_release_version }}
+      
+      - name: Sign Frontend Image
+        run: |
+          cosign sign --yes \
+            acr3tiermernappao.azurecr.io/frontend:v${{ needs.semantic-release.outputs.new_release_version }}
+            
+
+      # ============================================
       # Logout
       # ============================================
       - name: Azure Logout
         run: az logout
         if: always()
+
+  notify-results:
+    name: Notify Pipeline Results
+    runs-on: ubuntu-latest
+    needs: [security-scans, semantic-release, build-and-scan, push-to-acr]
+    if: always()
+    
+    steps:
+      - name: Create Success Issue
+        if: needs.push-to-acr.result == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const version = '${{ needs.semantic-release.outputs.new_release_version }}';
+            const runUrl = `${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`;
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `DevSecOps Pipeline Success - v${version}`,
+              body: `## Pipeline Completed Successfully
+            
+            **Version:** v${version}
+            **Workflow Run:** ${runUrl}
+            **Triggered by:** ${{ github.actor }}
+            **Commit:** ${{ github.sha }}
+            
+            ### Deliverables
+            - Backend image pushed to ACR
+            - Frontend image pushed to ACR
+            - Images signed with Cosign
+            - SBOM generated
+            
+            ### Security Checks
+            - GitLeaks: No secrets detected
+            - OWASP Dependency-Check: Scanned
+            - SonarCloud: Quality gate passed
+            - Hadolint: Dockerfiles validated
+            - Trivy: Container vulnerabilities reported
+            
+            ### Image Tags
+            \`\`\`
+            acr3tiermernappao.azurecr.io/backend:v${version}
+            acr3tiermernappao.azurecr.io/frontend:v${version}
+            \`\`\`
+            
+            ---
+            *This issue was automatically created by the DevSecOps pipeline.*`,
+              labels: ['pipeline-success', 'automated']
+            });
+      
+      - name: Create No Release Issue
+        if: needs.push-to-acr.result == 'skipped'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runUrl = `${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`;
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `DevSecOps Pipeline - No Release Required`,
+              body: `## No New Release Published
+            
+            **Workflow Run:** ${runUrl}
+            **Triggered by:** ${{ github.actor }}
+            **Commit:** ${{ github.sha }}
+            
+            ### Summary
+            No new version was published because no conventional commits were detected that trigger a release.
+            
+            ### Security Checks Completed
+            - GitLeaks: Executed
+            - OWASP Dependency-Check: Executed
+            - SonarCloud: Executed
+            
+            ### Next Steps
+            - No action required
+            - Build and push jobs were skipped as no new release was needed
+            
+            ---
+            *This issue was automatically created by the DevSecOps pipeline.*`,
+              labels: ['pipeline-skipped', 'automated']
+            });
+      
+      - name: Create Failure Issue
+        if: |
+          needs.security-scans.result == 'failure' ||
+          needs.semantic-release.result == 'failure' ||
+          needs.build-and-scan.result == 'failure' ||
+          needs.push-to-acr.result == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runUrl = `${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`;
+            const failedJob = '${{ needs.security-scans.result }}' === 'failure' ? 'Security Scans' :
+                              '${{ needs.semantic-release.result }}' === 'failure' ? 'Semantic Release' :
+                              '${{ needs.build-and-scan.result }}' === 'failure' ? 'Build & Scan' :
+                              '${{ needs.push-to-acr.result }}' === 'failure' ? 'Push to ACR' : 'Unknown';
+            
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `DevSecOps Pipeline Failed - ${failedJob}`,
+              body: `## Pipeline Failure Alert
+            
+            **Failed Job:** ${failedJob}
+            **Workflow Run:** ${runUrl}
+            **Triggered by:** ${{ github.actor }}
+            **Commit:** ${{ github.sha }}
+            
+            ### Job Status
+            - Security Scans: ${{ needs.security-scans.result }}
+            - Semantic Release: ${{ needs.semantic-release.result }}
+            - Build & Scan: ${{ needs.build-and-scan.result }}
+            - Push to ACR: ${{ needs.push-to-acr.result }}
+            
+            ### Action Required
+            Please review the workflow logs and address the failure before the next deployment.
+            
+            ---
+            *This issue was automatically created by the DevSecOps pipeline.*`,
+              labels: ['pipeline-failure', 'automated', 'urgent']
+            });
