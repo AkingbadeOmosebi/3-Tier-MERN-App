@@ -1,3 +1,9 @@
+## [1.1.0](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.0.3...v1.1.0) (2025-12-15)
+
+### Features
+
+* add Terraform bootstrap for state backend ([3fdc522](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/3fdc52288b47158395f02a18fa5dc7b9e6a28759))
+
 ## [1.0.3](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.0.2...v1.0.3) (2025-12-15)
 
 ### Bug Fixes
