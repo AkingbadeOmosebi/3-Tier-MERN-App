@@ -1,3 +1,10 @@
+## [1.2.0](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.1.0...v1.2.0) (2025-12-15)
+
+### Features
+
+* add Terraform infrastructure modules ([46de0ea](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/46de0ea3d4d6c7f46af5cae5c0917f59b1f2d5fc))
+* add Terraform infrastructure modules ([6b5da50](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/6b5da5034f7549c8bdaf295045605ca14ba44571))
+
 ## [1.1.0](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.0.3...v1.1.0) (2025-12-15)
 
 ### Features
