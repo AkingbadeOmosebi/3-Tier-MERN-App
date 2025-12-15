@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.0.2...v1.0.3) (2025-12-15)
+
+### Bug Fixes
+
+* upload Trivy results separately with unique categories ([1531692](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/1531692f6fffd37a0f2972c7a9b48dda5b324f3a))
+* upload Trivy results separately with unique categories ([3c91c08](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/3c91c0891e7a5610e9fc50351dc17e1f95459f39))
+
 ## [1.0.2](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.0.1...v1.0.2) (2025-12-14)
 
 ### Bug Fixes
