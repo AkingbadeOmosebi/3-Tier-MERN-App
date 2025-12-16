@@ -4,7 +4,7 @@ variable "subscription_id" {
   sensitive   = true
 }
 
-variable "location" {
+variable "location_primary" {
   description = "Azure region"
   type        = string
   default     = "North Europe"  # # Initially designed for zone redundancy, but disabled as most EU regions had capacity issues

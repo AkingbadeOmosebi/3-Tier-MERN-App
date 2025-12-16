@@ -5,6 +5,6 @@ terraform {
     resource_group_name  = "rg-terraform-state"
     storage_account_name = "sttfstatem9dyyto8"
     container_name       = "tfstate"
-    key                  = "aks-cluster.tfstate"  # Unique key for the AKS cluster state file
+    key                  = "aks-cluster.tfstate" # Unique key for the AKS cluster state file
   }
 }

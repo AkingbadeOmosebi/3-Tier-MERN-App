@@ -5,7 +5,7 @@
 variable "subscription_id" {
   description = "Azure subscription ID"
   type        = string
-  sensitive   = true  # Won't show in logs
+  sensitive   = true # Won't show in logs
 }
 
 variable "location" {
@@ -29,19 +29,19 @@ variable "cluster_name" {
 variable "kubernetes_version" {
   description = "Kubernetes version (use 'az aks get-versions --location westeurope' to see available)"
   type        = string
-  default     = "1.33"  # Stable, well-tested community-supported version
+  default     = "1.33" # Stable, well-tested community-supported version
 }
 
 variable "system_node_count" {
   description = "Number of nodes in system pool (Kubernetes infrastructure)"
   type        = number
-  default     = 3  # One per each availability zone (3 zones total)
+  default     = 3 # One per each availability zone (3 zones total)
 }
 
 variable "user_node_count" {
   description = "Initial number of nodes in user pool (your applications)"
   type        = number
-  default     = 3  # One per each availability zone (3 zones total)
+  default     = 3 # One per each availability zone (3 zones total)
 }
 
 variable "user_node_min_count" {

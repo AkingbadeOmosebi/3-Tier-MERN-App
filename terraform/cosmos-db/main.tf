@@ -45,7 +45,7 @@ resource "random_string" "cosmos_suffix" {
 # Cosmos DB Account (MongoDB API)
 resource "azurerm_cosmosdb_account" "main" {
   name                = "${var.cosmos_account_name}-${random_string.cosmos_suffix.result}"
-  location            = var.location
+  location            = var.location_primary  # updated the name to match corresponding variable
   resource_group_name = data.azurerm_resource_group.main.name
   offer_type          = "Standard"
   kind                = "MongoDB"
@@ -70,7 +70,7 @@ resource "azurerm_cosmosdb_account" "main" {
 
   # Primary region with zone redundancy
   geo_location {
-    location          = var.location
+    location          = var.location_primary
     failover_priority = 0
     zone_redundant    = false  # # Initially designed for zone redundancy, but disabled as most EU regions had capacity issues
   }
