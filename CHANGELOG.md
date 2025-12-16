@@ -1,3 +1,14 @@
+## [1.4.0](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.3.0...v1.4.0) (2025-12-16)
+
+### ⚠ BREAKING CHANGES
+
+* **cicd:** All deployments require GitHub Environment approval
+
+### Features
+
+* **cicd:** add automated deployment pipeline with security scanning ([ccb1501](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/ccb1501572e21574a1ba2f253a0fe6cb79dbf7b4))
+* **infrastructure:** deploy AKS cluster and Cosmos DB with HA ([f6c80ca](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/f6c80cad6792855d2ff6e468de7965200169e070))
+
 ## [1.3.0](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.2.0...v1.3.0) (2025-12-16)
 
 ### Features
