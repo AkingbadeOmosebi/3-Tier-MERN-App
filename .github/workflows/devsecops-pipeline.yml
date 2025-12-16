@@ -17,7 +17,7 @@ permissions:
   contents: read
   pull-requests: write 
   security-events: write  # For security scanning
-  id-token: write        # For OIDC
+  id-token: write        # For OIDC permissions
 
 jobs:
   security-scans:

@@ -7,7 +7,7 @@ on:
       - main
     paths:
       - 'terraform/**'
-      - '!terraform/oidc/**' # Exclude OIDC config changes, hence the '!'
+      - '!terraform/oidc/**' # Exclude OIDC config changes, hence the '!' to represent negation
       - '.github/workflows/terraform-*.yml'
 
 # Required permissions for OIDC authentication
