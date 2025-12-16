@@ -1,3 +1,10 @@
+## [1.3.0](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.2.0...v1.3.0) (2025-12-16)
+
+### Features
+
+* complete infrastructure deployment ([1a7c604](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/1a7c604bcb31db8b4002491f155987d2c8bece91))
+* complete infrastructure deployment ([1635252](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/1635252decc804f0ab8adde3c5b0d8ca82ebb14e))
+
 ## [1.2.0](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.1.0...v1.2.0) (2025-12-15)
 
 ### Features
