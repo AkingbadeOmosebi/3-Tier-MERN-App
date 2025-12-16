@@ -44,7 +44,7 @@ resource "azuread_application_federated_identity_credential" "github_actions" {
 
   audiences = ["api://AzureADTokenExchange"]
   issuer    = "https://token.actions.githubusercontent.com"
-  subject   = "repo:AkingbadeOmosebi/3-Tier-MERN-App:ref:refs/heads/main"
+  subject   = "repo:AkingbadeOmosebi/3-Tier-MERN-App:environment:production"
 }
 
 # Create Resource Group for AKS and related resources
@@ -56,6 +56,19 @@ resource "azurerm_resource_group" "aks_rg" {
 # Assign Contributor role to the Service Principal for the Resource Group
 resource "azurerm_role_assignment" "github_oidc_contributor" {
   scope                = azurerm_resource_group.aks_rg.id
+  role_definition_name = "Contributor"
+  principal_id         = azuread_service_principal.github_oidc.object_id
+}
+
+# This references the RG created by my bootstrap module
+# Use "data" because we're not creating it, just looking it up
+data "azurerm_resource_group" "tfstate" {
+  name = "rg-terraform-state"
+}
+
+# Grant service principal access to the state storage resource group
+resource "azurerm_role_assignment" "github_oidc_tfstate_access" {
+  scope                = data.azurerm_resource_group.tfstate.id  # Uses the data source above
   role_definition_name = "Contributor"
   principal_id         = azuread_service_principal.github_oidc.object_id
 }

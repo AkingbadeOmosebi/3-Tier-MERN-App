@@ -58,3 +58,11 @@ resource "azurerm_role_assignment" "acr_push" {
   role_definition_name = "AcrPush"
   principal_id         = data.azuread_service_principal.github_oidc.object_id
 }
+
+# Grant GitHub OIDC service principal Contributor access to this resource group
+# This allows GitHub Actions to manage resources within this RG
+resource "azurerm_role_assignment" "github_oidc_rg_access" {
+  scope                = azurerm_resource_group.main.id
+  role_definition_name = "Contributor"
+  principal_id         = data.azuread_service_principal.github_oidc.object_id
+}

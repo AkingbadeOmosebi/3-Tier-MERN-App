@@ -44,7 +44,8 @@ jobs:
     timeout-minutes: 15
     strategy:
       matrix:
-        module: ['networking', 'core-infra', 'aks-cluster', 'cosmos-db'] # List of modules to estimate costs for
+        module: ['core-infra', 'networking', 'cosmos-db', 'aks-cluster'] # List of modules to estimate costs for # Rearranged for logical order, DB should come before AKS and core-infra before networking
+      max-parallel: 1   # Each are ordered in dependent sequence
       fail-fast: false
     
     defaults:
