@@ -96,7 +96,7 @@ jobs:
     # I deploy modules in strict order due to dependencies
     strategy:
       matrix:
-        module: ['networking', 'core-infra', 'aks-cluster', 'cosmos-db']
+        module: ['core-infra', 'networking', 'cosmos-db', 'aks-cluster'] # Ordered by dependencies: core-infra -> networking -> cosmos-db -> aks-cluster
       max-parallel: 1   # Deploy one module at a time, no parallelization
       fail-fast: true   # Stop entire deployment if any module fails
 
