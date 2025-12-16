@@ -253,4 +253,4 @@ managed_by  = "terraform"
 - Private cluster configuration for enhanced security
 
 ## Author
-Infrastructure as Code managed via Terraform by Akingbade Omosebi
+Infrastructure as Code managed via Terraform by Akingbade Omosebi# Updated Tue, Dec 16, 2025  9:43:02 PM
