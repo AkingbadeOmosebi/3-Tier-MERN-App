@@ -1,3 +1,9 @@
+## [1.4.1](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.4.0...v1.4.1) (2025-12-16)
+
+### Bug Fixes
+
+* checkov soft_fail parameter ([3e05c80](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/3e05c801461329dcb7d17da03fe7a26650227ad1))
+
 ## [1.4.0](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.3.0...v1.4.0) (2025-12-16)
 
 ### ⚠ BREAKING CHANGES
