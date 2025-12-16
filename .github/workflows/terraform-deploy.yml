@@ -34,7 +34,7 @@ jobs:
           skip_path: terraform/oidc # I exclude OIDC from scanning
           framework: terraform
           output_format: cli
-          soft_fail: false  # Fail workflow if critical issues found
+          soft_fail: false  # It wont fail workflow if critical issues found
     
   # Cost estimation runs after security scan using infracost
   cost-estimation:
