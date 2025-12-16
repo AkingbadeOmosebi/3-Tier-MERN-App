@@ -50,12 +50,15 @@ resource "azurerm_cosmosdb_account" "main" {
   offer_type          = "Standard"
   kind                = "MongoDB"
 
+  # MongoDB server version
+  mongo_server_version = "4.2"
+
   # Serverless capacity mode
   capabilities {
     name = "EnableServerless"
   }
 
-  # MongoDB version 4.2
+  # MongoDB API type
   capabilities {
     name = "EnableMongo"
   }
@@ -77,8 +80,10 @@ resource "azurerm_cosmosdb_account" "main" {
 
   # Continuous backup
   backup {
-    type = "Continuous"
-    tier = "Continuous7Days"
+    type                = "Periodic"
+    interval_in_minutes = 240  # 4 hours
+    retention_in_hours  = 168  # 7 days
+    
   }
 
   tags = {

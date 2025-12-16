@@ -7,7 +7,7 @@ variable "subscription_id" {
 variable "location" {
   description = "Azure region"
   type        = string
-  default     = "East US"  # # Initially designed for zone redundancy, but disabled as most EU regions had capacity issues
+  default     = "North Europe"  # # Initially designed for zone redundancy, but disabled as most EU regions had capacity issues
 }
 
 variable "resource_group_name" {
