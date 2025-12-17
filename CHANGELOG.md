@@ -1,3 +1,9 @@
+## [1.11.0](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.10.0...v1.11.0) (2025-12-17)
+
+### Features
+
+* Add ArgoCD Image Updater annotations for automated image updates ([65251b2](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/65251b26c7c5ae5a3c8a03bda189aca881988caa))
+
 ## [1.10.0](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.9.4...v1.10.0) (2025-12-17)
 
 ### Features
