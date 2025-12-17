@@ -20,32 +20,10 @@ permissions:
   id-token: write        # For OIDC permissions
 
 jobs:
-  check-infrastructure:
-    name: Verify Infrastructure Deployment
-    runs-on: ubuntu-latest
-    outputs:
-      infra_ready: ${{ steps.check.outputs.ready }}
-    steps:
-    - name: Check if infrastructure deployment succeeded
-      id: check
-      run: |
-        if [ "${{ github.event.workflow_run.conclusion }}" == "success" ]; then
-          echo "ready=true" >> $GITHUB_OUTPUT
-          echo "Infrastructure deployment succeeded, proceeding with DevSecOps pipeline"
-        else
-          echo "ready=false" >> $GITHUB_OUTPUT
-          echo "Infrastructure deployment failed or was cancelled, skipping DevSecOps pipeline"
-          exit 1
-        fi
-
   security-scans:
     timeout-minutes: 30
     name: Code Security Scanning
     runs-on: ubuntu-latest
-    needs: [check-infrastructure]
-    if: |
-      always() &&
-      (needs.check-infrastructure.result == 'skipped' || needs.check-infrastructure.outputs.infra_ready == 'true')
     
     steps:
       - name: Checkout Code
@@ -113,8 +91,7 @@ jobs:
     timeout-minutes: 10
     name: Semantic Release & Versioning
     runs-on: ubuntu-latest
-    needs: [check-infrastructure, security-scans]
-    if: needs.check-infrastructure.outputs.infra_ready == 'true'
+    needs: security-scans
     permissions:  # Job-level override
       contents: write
       issues: write
@@ -155,10 +132,8 @@ jobs:
     timeout-minutes: 45
     name: Build & Container Security
     runs-on: ubuntu-latest
-    needs: [check-infrastructure, semantic-release]
-    if: |
-      needs.check-infrastructure.outputs.infra_ready == 'true' &&
-      needs.semantic-release.outputs.new_release_published == 'true'
+    needs: semantic-release
+    if: needs.semantic-release.outputs.new_release_published == 'true'
     
     steps:
       - name: Checkout Code
@@ -265,10 +240,8 @@ jobs:
     timeout-minutes: 30
     name: Push Images to Azure Container Registry
     runs-on: ubuntu-latest
-    needs: [check-infrastructure, semantic-release, build-and-scan]
-    if: |
-      needs.check-infrastructure.outputs.infra_ready == 'true' &&
-      needs.semantic-release.outputs.new_release_published == 'true'
+    needs: [semantic-release, build-and-scan]
+    if: needs.semantic-release.outputs.new_release_published == 'true'
     
     steps:
       - name: Checkout Code
@@ -345,7 +318,7 @@ jobs:
     permissions:
       issues: write
     runs-on: ubuntu-latest
-    needs: [check-infrastructure, security-scans, semantic-release, build-and-scan, push-to-acr]
+    needs: [security-scans, semantic-release, build-and-scan, push-to-acr]
     if: always()
     
     steps:
