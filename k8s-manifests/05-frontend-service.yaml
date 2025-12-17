@@ -8,7 +8,7 @@ metadata:
   annotations:
     service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /
 spec:
-  type: LoadBalancer  # Creates Azure Load Balancer with public IP!
+  type: ClusterIP  # to be exposed via Ingress (faster and cheaper for internal communication)
   selector:
     app: frontend
   ports:

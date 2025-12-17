@@ -1,0 +1,48 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mern-app
+  namespace: argocd
+  # Finalizer to ensure proper cleanup
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  # Project where this application belongs
+  project: default
+  
+  # Source: Where the manifests are stored
+  source:
+    repoURL: https://github.com/AkingbadeOmosebi/3-Tier-MERN-App
+    targetRevision: main
+    path: k8s-manifests
+  
+  # Destination: Where to deploy
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: mern-app
+  
+  # Sync policy: How ArgoCD should sync
+  syncPolicy:
+    # Automatic sync every 3 minutes
+    automated:
+      # Prune: Delete resources not in Git
+      prune: true
+      # Self-heal: Revert manual changes back to Git
+      selfHeal: true
+      # Allow empty: Deploy even if directory is empty
+      allowEmpty: false
+    
+    # Sync options
+    syncOptions:
+      # Create namespace if it doesn't exist
+      - CreateNamespace=true
+      # Validate resources before applying
+      - Validate=true
+    
+    # Retry strategy if sync fails
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
