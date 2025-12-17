@@ -40,8 +40,8 @@ RUN mkdir -p /var/cache/nginx/client_temp \
     chown -R nginx:nginx /etc/nginx/conf.d && \
     chmod -R 755 /var/cache/nginx
 
-# Expose port 80
-EXPOSE 80
+# Expose port 8080, switched from 80 as ports below 1024 are "privileged-ports" and require root, also to match nginx.conf
+EXPOSE 8080   
 
 # Healthcheck
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
