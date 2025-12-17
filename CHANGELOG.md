@@ -1,3 +1,9 @@
+## [1.8.0](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.7.1...v1.8.0) (2025-12-17)
+
+### Features
+
+* use API proxy pattern for backend communication ([0c7605b](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/0c7605b647ce5e7a1f9e475a5603e21e776719a2))
+
 ## [1.7.1](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.7.0...v1.7.1) (2025-12-17)
 
 ### Bug Fixes
