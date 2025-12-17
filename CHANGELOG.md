@@ -1,3 +1,9 @@
+## [1.9.2](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.9.1...v1.9.2) (2025-12-17)
+
+### Bug Fixes
+
+* use non-privileged port 8080 for nginx ([cf5ac22](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/cf5ac222a174bf4bf450c13b602c07ee3ee20f02))
+
 ## [1.9.1](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.9.0...v1.9.1) (2025-12-17)
 
 ### Bug Fixes
