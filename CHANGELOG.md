@@ -1,3 +1,11 @@
+## [1.4.3](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.4.2...v1.4.3) (2025-12-17)
+
+### Bug Fixes
+
+* execution ([9721317](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/972131798d05f997d0aec8181fc11f2387202173))
+* logical sequence and automation-dependencies (omitted step) ([512ba6a](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/512ba6a5023f2cf51b5a68136c9802390d02264f))
+* restructured terraform destroy logical approach ([e3d6c6f](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/e3d6c6f866aed59d895ee36c94a9d603acda45b0))
+
 ## [1.4.2](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.4.1...v1.4.2) (2025-12-16)
 
 ### Bug Fixes
