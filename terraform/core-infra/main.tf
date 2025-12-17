@@ -20,7 +20,7 @@ provider "azurerm" {
 
 provider "azuread" {}
 
-# Get the GitHub OIDC service principal
+# Gets the GitHub OIDC service principal
 data "azuread_service_principal" "github_oidc" {
   display_name = "GitHub-OIDC-3Tier-MERN-App"
 }
@@ -66,3 +66,6 @@ resource "azurerm_role_assignment" "github_oidc_rg_access" {
   role_definition_name = "Contributor"
   principal_id         = data.azuread_service_principal.github_oidc.object_id
 }
+
+
+# Trigger test# Trigger deployment
