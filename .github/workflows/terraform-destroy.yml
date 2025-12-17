@@ -87,9 +87,9 @@ jobs:
           ARM_USE_OIDC: true
           TF_VAR_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Destroy Core Infrastructure
-        if: contains(github.event.inputs.modules, 'all') || contains(github.event.inputs.modules, 'core-infra')
-        working-directory: terraform/core-infra
+      - name: Destroy Networking
+        if: contains(github.event.inputs.modules, 'all') || contains(github.event.inputs.modules, 'networking')
+        working-directory: terraform/networking
         run: |
           terraform init
           terraform destroy -auto-approve
@@ -100,9 +100,9 @@ jobs:
           ARM_USE_OIDC: true
           TF_VAR_subscription_id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-      - name: Destroy Networking
-        if: contains(github.event.inputs.modules, 'all') || contains(github.event.inputs.modules, 'networking')
-        working-directory: terraform/networking
+      - name: Destroy Core Infrastructure
+        if: contains(github.event.inputs.modules, 'all') || contains(github.event.inputs.modules, 'core-infra')
+        working-directory: terraform/core-infra
         run: |
           terraform init
           terraform destroy -auto-approve

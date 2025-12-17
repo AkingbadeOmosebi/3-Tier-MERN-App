@@ -20,6 +20,25 @@ permissions:
   id-token: write        # For OIDC permissions
 
 jobs:
+  # To server as a watcher for the Infrastructure deployment pipeline and only proceed if that was successful
+  check-infrastructure:
+    name: Verify Infrastructure Deployment
+    runs-on: ubuntu-latest
+    if: github.event_name == 'workflow_run'
+    outputs:
+      infra_ready: ${{ steps.check.outputs.ready }}
+    steps:
+      - name: Check if infrastructure deployment succeeded
+        id: check
+        run: |
+          if [ "${{ github.event.workflow_run.conclusion }}" == "success" ]; then
+            echo "ready=true" >> $GITHUB_OUTPUT
+            echo "Infrastructure deployment succeeded, proceeding with DevSecOps pipeline"
+          else
+            echo "ready=false" >> $GITHUB_OUTPUT
+            echo "Infrastructure deployment failed or was cancelled, skipping DevSecOps pipeline"
+            exit 1
+          fi
   security-scans:
     timeout-minutes: 30
     name: Code Security Scanning
