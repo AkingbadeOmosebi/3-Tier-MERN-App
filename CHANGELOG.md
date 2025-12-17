@@ -1,3 +1,19 @@
+## [1.6.0](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.5.0...v1.6.0) (2025-12-17)
+
+### ⚠ BREAKING CHANGES
+
+* Migrated from local testing environment to full Azure cloud deployment with AKS, ACR, Cosmos DB, and production-grade DevSecOps pipeline. This marks the transition from v1.x which was (vigorous testing/prep) phase, to v2.x (cloud deployment) phase.
+* Migrated from local testing environment to full Azure cloud deployment with AKS, ACR, Cosmos DB, and production-grade DevSecOps pipeline. This marks the transition from v1.x which was (vigorous testing/prep) phase, to v2.x (cloud deployment) phase.
+* Migrated from local testing environment to full Azure cloud deployment with AKS, ACR, Cosmos DB, and production-grade DevSecOps pipeline. This marks the transition from v1.x which was (vigorous testing/prep) phase, to v2.x (cloud deployment) phase.
+* Migrated from local testing environment to full Azure cloud deployment with AKS, ACR, Cosmos DB, and production-grade DevSecOps pipeline. This marks the transition from v1.x which was (vigorous testing/prep) phase, to v2.x (cloud deployment) phase.
+
+### Features
+
+* production-ready Azure infrastructure deployment ([8611aa5](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/8611aa5a9119e60654e88d2312f12f32211c7a5c))
+* production-ready Azure infrastructure deployment ([55c344c](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/55c344cb2b7ee4e24e953c84bb7920ea0cc330bc))
+* production-ready Azure infrastructure deployment ([7ba6df1](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/7ba6df171fb01bb2e0af96187af01e9abd7673b0))
+* production-ready Azure infrastructure deployment ([521df9f](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/521df9fa4f0ceae4ed909452dc33f727e400d2ac))
+
 ## [1.5.0](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.4.3...v1.5.0) (2025-12-17)
 
 ### ⚠ BREAKING CHANGES
