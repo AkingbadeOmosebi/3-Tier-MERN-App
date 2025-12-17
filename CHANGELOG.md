@@ -1,3 +1,9 @@
+## [1.9.3](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.9.2...v1.9.3) (2025-12-17)
+
+### Bug Fixes
+
+* simplicity nginx configurations ([866b543](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/866b543ce54d27da9b1384dd5d105758a9ad8647))
+
 ## [1.9.2](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.9.1...v1.9.2) (2025-12-17)
 
 ### Bug Fixes
