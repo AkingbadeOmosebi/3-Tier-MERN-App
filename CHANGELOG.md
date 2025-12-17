@@ -1,3 +1,9 @@
+## [1.7.1](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.7.0...v1.7.1) (2025-12-17)
+
+### Bug Fixes
+
+* backend connection string made flexible for AKS or Local ([7946e60](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/7946e60587850b0d56268c594c441194e584cb78))
+
 ## [1.7.0](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.6.0...v1.7.0) (2025-12-17)
 
 ### ⚠ BREAKING CHANGES
