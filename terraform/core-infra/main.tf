@@ -68,4 +68,5 @@ resource "azurerm_role_assignment" "github_oidc_rg_access" {
 }
 
 
-# Trigger test# Trigger deployment!
+# Trigger test# 
+# Trigger deployment!
