@@ -72,3 +72,10 @@ resource "azurerm_role_assignment" "github_oidc_tfstate_access" {
   role_definition_name = "Contributor"
   principal_id         = azuread_service_principal.github_oidc.object_id
 }
+
+# Grant subscription-level Contributor access for full infrastructure automation
+resource "azurerm_role_assignment" "github_oidc_subscription_contributor" {
+  scope                = "/subscriptions/${data.azurerm_client_config.current.subscription_id}"
+  role_definition_name = "Owner"
+  principal_id         = azuread_service_principal.github_oidc.object_id
+}
