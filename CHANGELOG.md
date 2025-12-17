@@ -1,3 +1,9 @@
+## [1.9.4](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.9.3...v1.9.4) (2025-12-17)
+
+### Bug Fixes
+
+* Cosmos DB connection with proper MongoDB driver options ([8f381b3](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/8f381b36e2e5f96de82e49e8e7231e5a4b8ed3ee))
+
 ## [1.9.3](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.9.2...v1.9.3) (2025-12-17)
 
 ### Bug Fixes
