@@ -6,6 +6,23 @@ metadata:
   # Finalizer to ensure proper cleanup
   finalizers:
     - resources-finalizer.argocd.argoproj.io
+  
+  # Image Updater annotations
+  annotations:
+    # List of images to monitor (format: <alias>=<image-spec>)
+    argocd-image-updater.argoproj.io/image-list: backend=acr3tiermernappao.azurecr.io/backend,frontend=acr3tiermernappao.azurecr.io/frontend
+    
+    # Update strategy: semver (semantic versioning)
+    argocd-image-updater.argoproj.io/backend.update-strategy: semver
+    argocd-image-updater.argoproj.io/frontend.update-strategy: semver
+    
+    # Pull secret for ACR authentication
+    argocd-image-updater.argoproj.io/backend.pull-secret: pullsecret:argocd/acr-credentials
+    argocd-image-updater.argoproj.io/frontend.pull-secret: pullsecret:argocd/acr-credentials
+    
+    # Write-back method: argocd (stores overrides in ArgoCD, not Git)
+    argocd-image-updater.argoproj.io/write-back-method: argocd
+
 spec:
   # Project where this application belongs
   project: default
