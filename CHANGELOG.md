@@ -1,3 +1,9 @@
+## [1.10.0](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.9.4...v1.10.0) (2025-12-17)
+
+### Features
+
+* complete AKS deployment manifests ([0a82b6f](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/0a82b6f50416a5da2246b882df46aae25409dc42))
+
 ## [1.9.4](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.9.3...v1.9.4) (2025-12-17)
 
 ### Bug Fixes
