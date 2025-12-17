@@ -20,6 +20,7 @@ permissions:
   id-token: write        # For OIDC permissions
 
 jobs:
+  # Stripped out former job (verify-infrastructure) as it's redundant with terraform-deploy.yml and prone to execution issues (less is more principle)
   security-scans:
     timeout-minutes: 30
     name: Code Security Scanning
