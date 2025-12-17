@@ -305,7 +305,7 @@ jobs:
           docker push acr3tiermernappao.azurecr.io/backend:v${{ needs.semantic-release.outputs.new_release_version }}
           docker push acr3tiermernappao.azurecr.io/backend:latest
       
-      - name: Build & Push Frontend Image  # Same as above note
+      - name: Build & Push Frontend Image  # Same as above note...
         run: |
           docker build \
             -t acr3tiermernappao.azurecr.io/frontend:v${{ needs.semantic-release.outputs.new_release_version }} \
