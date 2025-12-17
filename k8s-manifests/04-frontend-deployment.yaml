@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: mern-app
+  labels:
+    app: frontend
+    tier: ui
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+        tier: ui
+    spec:
+      containers:
+      - name: frontend
+        image: acr3tiermernappao.azurecr.io/frontend:v1.9.4  # My new image!
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80  # switched back to port 80 for nginx
+          protocol: TCP        
+     
+     # Resource limits - Prevent one pod from using all cluster resources
+        resources:
+          requests:
+            cpu: 100m      # Frontend needs less CPU than backend
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 256Mi
+        
+        # Health checks - nginx root page
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 3
+          failureThreshold: 3
+        
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        
+        # discarding it, for simplicity
+#        securityContext:
+#          runAsNonRoot: true
+#          runAsUser: 101  # nginx user
+#          allowPrivilegeEscalation: false
+#          capabilities:
+#            drop:
+#            - ALL

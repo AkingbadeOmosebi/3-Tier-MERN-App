@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: mern-app
+  labels:
+    app: backend
+    tier: api
+spec:
+  replicas: 3  # Run 3 backend pods for high availability
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+        tier: api
+    spec:
+      containers:
+      - name: backend
+        image: acr3tiermernappao.azurecr.io/backend:v1.9.4  # Your new image!
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5050  # my backend port
+          name: http
+          protocol: TCP
+        
+        # Environment variables to be read from my Secrets
+        env:
+        - name: MONGODB_URI
+          valueFrom:
+            secretKeyRef:
+              name: cosmos-secret
+              key: mongodb-uri
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: cosmos-secret
+              key: db-name
+        - name: PORT
+          value: "5050"
+        - name: NODE_ENV
+          value: "production"
+        
+        # Resource limits - Prevent one pod from using all clusters resources
+        resources:
+          requests:  # Minimum guaranteed resources
+            cpu: 250m      # 0.25 CPU cores
+            memory: 256Mi  # 256 MB RAM
+          limits:    # Maximum allowed resources
+            cpu: 500m      # 0.5 CPU cores
+            memory: 512Mi  # 512 MB RAM
+        
+        # Liveness probe - Bassically "Is the container alive???"
+        # If this fails, Kubernetes RESTARTS the container
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5050
+          initialDelaySeconds: 30  # Wait 30s after start before checking
+          periodSeconds: 10        # Check every 10s
+          timeoutSeconds: 3        # Timeout after 3s
+          failureThreshold: 3      # Restart after 3 failures
+        
+        # Readiness probe - "Is the container ready to receive traffic????"
+        # If this fails, Kubernetes REMOVES it from service (no traffic)
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 5050
+          initialDelaySeconds: 10  # Start checking after 10s
+          periodSeconds: 5         # Check every 5s
+          timeoutSeconds: 3
+          failureThreshold: 3
+        
+        # Security context - Run as non-root user
+        # Helps improve security by limiting permissions, similar to Dockerfile USER (defense in depth security)
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 1001
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL

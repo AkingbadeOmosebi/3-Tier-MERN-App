@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  namespace: mern-app
+  labels:
+    app: frontend
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /
+spec:
+  type: LoadBalancer  # Creates Azure Load Balancer with public IP!
+  selector:
+    app: frontend
+  ports:
+  - name: http
+    port: 80          # External access on port 80
+    targetPort: 80    # nginx serves on port 80
+    protocol: TCP
+  sessionAffinity: ClientIP  # Sticky sessions for same client
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800  # 3 hours session affinity timeout

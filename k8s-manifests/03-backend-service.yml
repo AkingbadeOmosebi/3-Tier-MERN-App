@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: mern-app
+  labels:
+    app: backend
+spec:
+  type: ClusterIP  # Internal only (not exposed to internet)
+  selector:
+    app: backend  # Routes to pods with label "app: backend"
+  ports:
+  - name: http
+    port: 5050        # Service port (what frontend calls)
+    targetPort: 5050  # Container port (where backend listens)
+    protocol: TCP
+  sessionAffinity: None  # default Round-robin load balancing
