@@ -241,7 +241,7 @@ jobs:
     timeout-minutes: 30
     name: Push Images to Azure Container Registry
     runs-on: ubuntu-latest
-    environment: production
+    environment: production  # forgot to add production environment like deploy-infrastructure, which OIDC now requires, one built before another (chicken-and-egg problem)
     needs: [semantic-release, build-and-scan]
     if: needs.semantic-release.outputs.new_release_published == 'true'
     
