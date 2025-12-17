@@ -1,3 +1,9 @@
+## [1.9.1](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.9.0...v1.9.1) (2025-12-17)
+
+### Bug Fixes
+
+* nginx permission denied for cache directories ([6c91e3d](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/6c91e3d15b04dfdb81fb62395d115c35b3f70f27))
+
 ## [1.9.0](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.8.0...v1.9.0) (2025-12-17)
 
 ### Features
