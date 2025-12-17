@@ -1,3 +1,13 @@
+## [1.5.0](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.4.3...v1.5.0) (2025-12-17)
+
+### ⚠ BREAKING CHANGES
+
+* Migrated from local testing environment to full Azure cloud deployment with AKS, ACR, Cosmos DB, and production-grade DevSecOps pipeline. This marks the transition from v1.x which was (vigorous testing/prep) phase, to v2.x (cloud deployment) phase.
+
+### Features
+
+* production-ready Azure infrastructure deployment ([0f80dd7](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/0f80dd775e8e2fa03a5eb37c5adcab0fa059c36f))
+
 ## [1.4.3](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.4.2...v1.4.3) (2025-12-17)
 
 ### Bug Fixes
