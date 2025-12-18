@@ -4,10 +4,9 @@
 [![DevSecOps Pipeline](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/actions/workflows/devsecops-pipeline.yml/badge.svg)](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/actions/workflows/devsecops-pipeline.yml)
 [![Terraform Deploy](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/actions/workflows/terraform-deploy.yml/badge.svg)](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/actions/workflows/terraform-deploy.yml)
 [![Terraform Destroy](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/actions/workflows/terraform-destroy.yml/badge.svg)](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/actions/workflows/terraform-destroy.yml)
-[![Terraform PR Validation](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/actions/workflows/terraform-pr.yml/badge.svg)](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/actions/workflows/terraform-pr.yml)
+
 
 <!-- Code Quality & Security Analysis -->
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=AkingbadeOmosebi_3-Tier-MERN-App&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=AkingbadeOmosebi_3-Tier-MERN-App)
 [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=AkingbadeOmosebi_3-Tier-MERN-App&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=AkingbadeOmosebi_3-Tier-MERN-App)
 [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=AkingbadeOmosebi_3-Tier-MERN-App&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=AkingbadeOmosebi_3-Tier-MERN-App)
 
