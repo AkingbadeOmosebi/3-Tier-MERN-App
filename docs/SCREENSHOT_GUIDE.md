@@ -272,6 +272,21 @@ helm list -A
 
 ---
 
+
+#### Screenshot 16: DNS Configuration (Namescheap)
+**File:** `18-DNS-Config-NamesCheap.png`
+
+**Shows:** Advanced DNS configuration for ingress and tls, for ease of use and in accessing App
+**Demonstrates:**
+- Understanding and purpose of DNS systems
+- DNS lifecycle (renewal & procurement) 
+- Advanced DNS configurations as domain & sub-domain
+- DNS routing and propagation (DNS look-up via 'nslookup' and dns resolution)
+
+![TLS Certificate Detail](images/18-DNS-Config-NamesCheap.png)
+
+---
+
 ## Additional Azure Infrastructure Screenshots
 
 These supplementary screenshots provide additional context about the Azure infrastructure setup:
