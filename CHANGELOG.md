@@ -1,3 +1,9 @@
+## [1.11.1](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.11.0...v1.11.1) (2025-12-18)
+
+### Bug Fixes
+
+* Add input validation to prevent NoSQL injection ([df44033](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/commit/df44033653e48ac325c96a4aef248d5830d14317))
+
 ## [1.11.0](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/compare/v1.10.0...v1.11.0) (2025-12-17)
 
 ### Features
