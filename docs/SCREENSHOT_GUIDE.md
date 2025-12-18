@@ -277,6 +277,7 @@ helm list -A
 **File:** `18-DNS-Config-NamesCheap.png`
 
 **Shows:** Advanced DNS configuration for ingress and tls, for ease of use and in accessing App
+
 **Demonstrates:**
 - Understanding and purpose of DNS systems
 - DNS lifecycle (renewal & procurement) 
