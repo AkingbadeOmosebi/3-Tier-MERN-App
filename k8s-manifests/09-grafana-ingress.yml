@@ -1,0 +1,36 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana-ingress
+  namespace: monitoring
+  annotations:
+    # Use nginx ingress controller
+    kubernetes.io/ingress.class: nginx
+    
+    # Enable TLS with cert-manager
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    
+    # Force HTTPS redirect
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    
+    # Backend protocol
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+spec:
+  # TLS configuration
+  tls:
+  - hosts:
+    - grafana.ak-cloudtechdigital-az.info
+    secretName: grafana-tls-secret
+  
+  # Routing rules
+  rules:
+  - host: grafana.ak-cloudtechdigital-az.info
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: kube-prometheus-stack-grafana
+            port:
+              number: 80

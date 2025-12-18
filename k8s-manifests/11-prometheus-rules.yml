@@ -1,0 +1,135 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: mern-portfolio-alerts
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+    role: alert-rules
+spec:
+  groups:
+
+  # MERN Application Alerts
+  - name: mern-application
+    interval: 30s
+    rules:
+
+    - alert: MERNPodNotReady
+      expr: |
+        kube_pod_container_status_ready{
+          namespace="mern-app"
+        } == 0
+      for: 2m
+      labels:
+        severity: critical
+        service: mern-portfolio
+        team: platform
+      annotations:
+        summary: "MERN pod not ready"
+        description: "One or more MERN containers have been not ready for over 2 minutes."
+        runbook_url: "https://github.com/your-org/runbooks/mern-pod-not-ready.md"
+
+    - alert: MERNHighCPUUsage
+      expr: |
+        (
+          sum by (pod) (
+            rate(container_cpu_usage_seconds_total{
+              namespace="mern-app",
+              container!="",
+              container!="POD"
+            }[5m])
+          )
+          /
+          sum by (pod) (
+            kube_pod_container_resource_limits_cpu_cores{
+              namespace="mern-app"
+            }
+          )
+        ) > 0.8
+      for: 5m
+      labels:
+        severity: warning
+        service: mern-portfolio
+        team: platform
+      annotations:
+        summary: "High CPU usage on MERN pod"
+        description: "MERN pod CPU usage is above 80% of its configured limit for 5 minutes."
+        runbook_url: "https://github.com/your-org/runbooks/mern-high-cpu.md"
+
+    - alert: MERNHighMemoryUsage
+      expr: |
+        (
+          container_memory_working_set_bytes{
+            namespace="mern-app",
+            container!="",
+            container!="POD"
+          }
+          /
+          kube_pod_container_resource_limits_memory_bytes{
+            namespace="mern-app"
+          }
+        ) > 0.8
+      for: 5m
+      labels:
+        severity: warning
+        service: mern-portfolio
+        team: platform
+      annotations:
+        summary: "High memory usage on MERN pod"
+        description: "MERN pod memory usage exceeds 80% of its memory limit."
+        runbook_url: "https://github.com/your-org/runbooks/mern-high-memory.md"
+
+    - alert: MERNPodCrashLooping
+      expr: |
+        increase(
+          kube_pod_container_status_restarts_total{
+            namespace="mern-app"
+          }[15m]
+        ) > 3
+      for: 5m
+      labels:
+        severity: warning
+        service: mern-portfolio
+        team: platform
+      annotations:
+        summary: "MERN pod restarting frequently"
+        description: "A MERN pod has restarted more than 3 times in the last 15 minutes."
+        runbook_url: "https://github.com/your-org/runbooks/mern-crashloop.md"
+
+  # Cluster / Node Alerts
+  - name: cluster-health
+    interval: 30s
+    rules:
+
+    - alert: KubernetesNodeNotReady
+      expr: |
+        kube_node_status_condition{
+          condition="Ready",
+          status="true"
+        } == 0
+      for: 3m
+      labels:
+        severity: critical
+        team: platform
+        component: infrastructure
+      annotations:
+        summary: "Kubernetes node not ready"
+        description: "A Kubernetes node has been in NotReady state for more than 3 minutes."
+        runbook_url: "https://github.com/your-org/runbooks/node-not-ready.md"
+
+    - alert: NodeHighCPUUsage
+      expr: |
+        (
+          1 - avg by (node) (
+            rate(node_cpu_seconds_total{mode="idle"}[5m])
+          )
+        ) > 0.85
+      for: 10m
+      labels:
+        severity: warning
+        team: platform
+        component: infrastructure
+      annotations:
+        summary: "High CPU usage on node"
+        description: "Node CPU usage has exceeded 85% for more than 10 minutes."
+        runbook_url: "https://github.com/your-org/runbooks/node-high-cpu.md"

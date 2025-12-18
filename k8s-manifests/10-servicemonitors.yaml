@@ -1,0 +1,36 @@
+---
+# ServiceMonitor for Backend
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: backend-monitor
+  namespace: mern-app
+  labels:
+    app: backend
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  endpoints:
+  - port: http
+    interval: 30s
+    path: /health
+---
+# ServiceMonitor for Frontend  
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: frontend-monitor
+  namespace: mern-app
+  labels:
+    app: frontend
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app: frontend
+  endpoints:
+  - port: http
+    interval: 30s
+    path: /
