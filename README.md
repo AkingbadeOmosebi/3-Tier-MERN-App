@@ -1,5 +1,16 @@
 # Production-Grade 3-Tier MERN Application on Azure Kubernetes
 
+<!-- CI/CD Pipeline Status -->
+[![DevSecOps Pipeline](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/actions/workflows/devsecops-pipeline.yml/badge.svg)](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/actions/workflows/devsecops-pipeline.yml)
+[![Terraform Deploy](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/actions/workflows/terraform-deploy.yml/badge.svg)](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/actions/workflows/terraform-deploy.yml)
+[![Terraform Destroy](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/actions/workflows/terraform-destroy.yml/badge.svg)](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/actions/workflows/terraform-destroy.yml)
+[![Terraform PR Validation](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/actions/workflows/terraform-pr.yml/badge.svg)](https://github.com/AkingbadeOmosebi/3-Tier-MERN-App/actions/workflows/terraform-pr.yml)
+
+<!-- Code Quality & Security Analysis -->
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=AkingbadeOmosebi_3-Tier-MERN-App&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=AkingbadeOmosebi_3-Tier-MERN-App)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=AkingbadeOmosebi_3-Tier-MERN-App&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=AkingbadeOmosebi_3-Tier-MERN-App)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=AkingbadeOmosebi_3-Tier-MERN-App&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=AkingbadeOmosebi_3-Tier-MERN-App)
+
 A complete cloud-native platform demonstrating enterprise DevSecOps practices, GitOps workflows, and comprehensive observability - from infrastructure provisioning through production deployment.
 
 **Live Demo:** https://mern.ak-cloudtechdigital-az.info
@@ -95,10 +106,6 @@ nginx Ingress Controller (TLS Termination)
 <img src="docs/images/05-kubectl-certificates.png" alt="TLS Certificates"/>
 <p align="center"><b>Let's Encrypt TLS</b><br/>Automatic renewal</p>
 </td>
-<td width="33%">
-<img src="docs/images/16-helm-list.png" alt="TLS Certificates"/>
-<p align="center"><b>Helm Lists</b><br/>Helm Charts</p>
-</td>
 </tr>
 </table>
 
@@ -108,7 +115,7 @@ nginx Ingress Controller (TLS Termination)
 <tr>
 <td width="33%">
 <img src="docs/images/12-azure-aks.png" alt="Azure AKS"/>
-<p align="center"><b>AKS Cluster</b><br/>2 node pools, 6 nodes running</p>
+<p align="center"><b>AKS Cluster</b><br/>6 nodes running</p>
 </td>
 <td width="33%">
 <img src="docs/images/13-azure-acr.png" alt="Azure ACR"/>
@@ -197,7 +204,7 @@ All infrastructure is defined as code with comprehensive CI/CD automation:
 - **Manual approval gates**: Production deployments require explicit approval
 - **Audit trail**: Every deployment tracked via GitHub Issues
 
-[Infrastructure Documentation →](docs/INFRASTRUCTURE.md)
+[Complete Implementation Guide →](docs/IMPLEMENTATION_GUIDE.md)
 
 ### 2. GitOps Deployment
 
@@ -306,7 +313,7 @@ Before any code reaches main, I see exactly what will change, how much it will c
 - Infracost cost estimation for all 4 modules
 - Cost breakdown posted to workflow summary
 
-**Stage 2: Manual Approval Gate** 
+**Stage 2: Manual Approval Gate** 🔐
 - **Production Environment Protection**: Deployment pauses for manual approval
 - Reviewer sees: security scan results, cost estimates, Terraform plans
 - Requires explicit approval before proceeding
@@ -352,7 +359,7 @@ Before any code reaches main, I see exactly what will change, how much it will c
 - Syft: Generates SBOM (Software Bill of Materials)
 - Trivy: Scans images for CVEs (continue-on-error for reporting)
 
-**Stage 4: Manual Approval Gate** 
+**Stage 4: Manual Approval Gate** 🔐
 - **Production Environment Protection**: Push to ACR requires approval
 - Reviewer sees: all security scan results, SBOM, vulnerability reports
 - Explicit approval required before images reach registry
@@ -387,7 +394,7 @@ Container images, once pushed to ACR, can be pulled by ArgoCD and deployed to pr
 - Or select `all` to destroy everything
 - Prevents accidental full destruction when testing
 
-**Layer 4: Manual Approval Gate** 
+**Layer 4: Manual Approval Gate** 🔐
 - **Production Environment Protection**: Requires approval even after confirmation
 - Reviewer sees: what will be destroyed, who triggered it, confirmation status
 - Final checkpoint before irreversible action
@@ -522,7 +529,7 @@ Infrastructure destruction is irreversible. Multiple layers prevent accidents wh
 │   ├── ARCHITECTURE.md                # System architecture with diagrams
 │   ├── DEVSECOPS_PIPELINE.md          # CI/CD pipeline deep dive
 │   ├── KUBERNETES_MANIFESTS.md        # K8s manifest documentation
-│   ├── INFRASTRUCTURE.md              # Terraform and Azure setup
+│   ├── SCREENSHOT_GUIDE.md            # Screenshot checklist
 │   └── images/                        # Screenshots and diagrams
 ├── terraform/
 │   ├── networking/                    # VNet, subnets, NSGs
@@ -737,7 +744,7 @@ I intentionally built this as a learning platform, not a final product. The gaps
 - **[Architecture](docs/ARCHITECTURE.md)**: System architecture with ASCII diagrams and traffic flows
 - **[DevSecOps Pipeline](docs/DEVSECOPS_PIPELINE.md)**: Deep dive into the CI/CD pipeline and security controls
 - **[Kubernetes Manifests](docs/KUBERNETES_MANIFESTS.md)**: Detailed explanation of every manifest file
-- **[Infrastructure](docs/INFRASTRUCTURE.md)**: Terraform modules and Azure architecture
+- **[Screenshot Guide](docs/SCREENSHOT_GUIDE.md)**: Visual documentation with all 15 screenshots
 
 ---
 
