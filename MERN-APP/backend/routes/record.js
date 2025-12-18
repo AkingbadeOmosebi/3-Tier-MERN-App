@@ -31,14 +31,29 @@ router.get("/:id", async (req, res) => {
 // This section will help you create a new record.
 router.post("/", async (req, res) => {
   try {
+    // Validate inputs
+    const { name, position, level } = req.body;
+    
+    if (!name || !position || !level) {
+      return res.status(400).send("Missing required fields");
+    }
+    
+    if (typeof name !== 'string' || name.length > 100 ||
+        typeof position !== 'string' || position.length > 100 ||
+        typeof level !== 'string' || level.length > 50) {
+      return res.status(400).send("Invalid input format");
+    }
+    
+    // Create document with validated data
     let newDocument = {
-      name: req.body.name,
-      position: req.body.position,
-      level: req.body.level,
+      name: name.trim(),
+      position: position.trim(),
+      level: level.trim()
     };
+    
     let collection = await db.collection("records");
     let result = await collection.insertOne(newDocument);
-    res.send(result).status(204);
+    res.status(201).send(result);
   } catch (err) {
     console.error(err);
     res.status(500).send("Error adding record");
