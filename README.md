@@ -56,6 +56,16 @@ nginx Ingress Controller (TLS Termination)
                                         Visualized in Grafana
                                         Managed by ArgoCD
 ```
+### Infrastructure & Network Topology (Deep Dive)
+![Infrastructure Architecture](docs/images/3-Tier-Mern-App-Architecture-Deployment.drawio.png)
+
+**Key Architectural Decisions:**
+- **Single Ingress Controller** instead of multiple LoadBalancers (cost optimization).
+- **GitOps with ArgoCD** for declarative infrastructure.
+- **Automated certificate management** using cert-manager and Let's Encrypt.
+- **Comprehensive monitoring** with custom alert rules for proactive response.
+
+[View Complete Architecture Details →](docs/ARCHITECTURE.md)
 
 **Key Architectural Decisions:**
 

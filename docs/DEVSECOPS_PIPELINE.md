@@ -22,6 +22,8 @@ A financial services client once asked how they could verify that container imag
 
 The pipeline follows a sequential execution model where each stage must pass before proceeding. This prevents vulnerable code from advancing while maintaining fast feedback loops for developers.
 
+![Infrastructure Architecture](images/3-Tier-Mern-App-Architecture-CICD%20PIPELINE.drawio.png)
+
 ### Security Scanning Layers
 
 **1. Secret Detection (GitLeaks)**
