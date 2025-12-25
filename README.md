@@ -667,11 +667,17 @@ kubectl get application -n argocd
 kubectl get pods -n mern-app
 ```
 
-### Access Services
+### Production Deployment Evidence
 
-- **Frontend**: https://mern.ak-cloudtechdigital-az.info
-- **ArgoCD**: https://argocd.ak-cloudtechdigital-az.info
-- **Grafana**: https://grafana.ak-cloudtechdigital-az.info
+This application was deployed to production with three TLS-secured domains:
+- **Frontend**: mern.ak-cloudtechdigital-az.info
+- **ArgoCD**: argocd.ak-cloudtechdigital-az.info  
+- **Grafana**: grafana.ak-cloudtechdigital-az.info
+
+Infrastructure destroyed after project completion to save costs.
+
+**Proof:** [23 Screenshots](docs/SCREENSHOT_GUIDE.md) | [DNS Config](docs/images/18-DNS-Config-NamesCheap.png) | [TLS Certs](docs/images/17-tls-certificate.png)
+
 
 ---
 
