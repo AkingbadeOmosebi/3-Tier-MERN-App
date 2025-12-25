@@ -12,7 +12,18 @@
 
 A complete cloud-native platform demonstrating enterprise DevSecOps practices, GitOps workflows, and comprehensive observability - from infrastructure provisioning through production deployment.
 
-**Live Demo:** https://mern.ak-cloudtechdigital-az.info
+
+**Deployment Status:** Previously deployed to production at 
+`mern.ak-cloudtechdigital-az.info` with automated TLS certificates. 
+Infrastructure destroyed to save costs after project completion.
+
+**Evidence of Production Deployment:**
+- ✅ 23 production screenshots ([view all](docs/SCREENSHOT_GUIDE.md))
+- ✅ DNS configuration ([screenshot](docs/images/18-DNS-Config-NamesCheap.png))
+- ✅ TLS certificates ([screenshot](docs/images/17-tls-certificate.png))
+- ✅ GitHub Actions deployment logs (workflow history)
+- ✅ 2 architecture diagrams ([deployment](docs/images/3-Tier-Mern-App-Architecture-Deployment.drawio.png))
+
 
 ---
 
